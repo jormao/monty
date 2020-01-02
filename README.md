@@ -105,4 +105,5 @@ example:
 | pstr | prints the string starting at the top of the stack, followed by a new line. |
 | rotl | rotates the stack to the top. |
 | rotr | rotates the stack to the bottom. |
- 
+| stack | sets the format of the data to a stack (LIFO). This is the default behavior of the program.|
+| queue | sets the format of the data to a queue (FIFO).|
