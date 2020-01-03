@@ -1,8 +1,9 @@
-#ifndef MONTY.H
-#define MONTY.H
-#include <stdlib.h>
+#ifndef MONTY_H
+#define MONTY_H
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
+ #include <stdlib.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -35,7 +36,9 @@ typedef struct instruction_s
 } instruction_t;
 
 void read_file (FILE *file);
-
+void error_function (int error_number);
+void split_string(char *lineptr, int line_number);
+void _opcode_function(char *value, char *opcode, int line_number);
 
 
 
