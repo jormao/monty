@@ -1,10 +1,11 @@
 #include "monty.h"
+stack_t *head = NULL;
 
 /**
  * main - function main for begin the program
  * @argc: number of arguments
  * @argv: array of arguments
- * 
+ *
  * Return: always 0
  */
 
@@ -13,25 +14,24 @@ int main(int argc, char **argv)
 	FILE *file;
 
 	if (argc != 2)
-		error_function(1);
-	if (argv[1] == NULL)
-		error_function(2);
-	if (access (argv[1], R_OK) == -1)
-		error_function(3);
+		error_function(1, argv[1], argc);
+	if (access(argv[1], R_OK) == -1)
+		error_function(2, argv[1], argc);
 	file = fopen(argv[1], "r");
 	if (file == NULL)
-		error_function(3);
+		error_function(2, argv[1], argc);
 	read_file(file);
 	fclose(file);
+	free_dlistint(head);
 	return (0);
 }
 
 /**
  * read_file - function to read the file
  * @file: pointer to file to read
- * 
+ *
  */
-	void read_file (FILE *file)
+	void read_file(FILE *file)
 	{
 
 	char *lineprt = NULL;
@@ -49,12 +49,34 @@ int main(int argc, char **argv)
 /**
  * error_function - function to print in stderr all the errors
  * @error_number: number of the error
- * 
+ * @file_name: name of the file with bitcode
+ * @line_number: line of the monty file that is readed.
+ *
  */
-void error_function (int error_number)
+void error_function(int error_number, char *file_name, int line_number)
 {
-	error_number++;
-
+	switch (error_number)
+	{
+		case 1:
+			fprintf(stderr, "USAGE: monty file\n");
+			break;
+		case 2:
+			fprintf(stderr, "Error: Can't open file %s\n", file_name);
+			break;
+		case 3:
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, file_name);
+			break;
+		case 4:
+			fprintf(stderr, "Error: malloc failed\n");
+			break;
+		case 5:
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			break;
+	default:
+		printf("Error pendiente por manejar\n");
+	}
+	free_dlistint(head);
+	exit(EXIT_FAILURE);
 }
 
 /**
@@ -69,31 +91,24 @@ void split_string(char *lineptr, int line_number)
 	char *opcode;
 	char *value;
 
-	if (lineptr == NULL)
-		error_function(4);
 	delim = "\n ";
 	opcode = strtok(lineptr, delim);
 	value = strtok(NULL, delim);
 
 	if (opcode != NULL)
-	{
-		printf("value = %s\n", value);
-		printf("opcode = %s\n", opcode);
-		printf("line_number = %d\n", line_number);
-		_opcode_function(char *value, char *opcode, int line_number);
-	}
+		_opcode_function(value, opcode, line_number);
 }
 
 /**
   * _opcode_function - find the specific opcode function to use
   * @value: Value to manipulate
-  * @opcode: string with monty instruction
-  * @line_number: the line where is the instruction 
+  * @monty_opcode: string with monty instruction
+  * @line_number: the line where is the instruction
   *
   */
 void _opcode_function(char *value, char *monty_opcode, int line_number)
 {
-	int i = 0;
+	int i = 0, signo = 1, j = 0, int_value = 0, valid_inst = 0;
 	instruction_t _functions[] = {
 		{"push", _push_to_stack},
 		{"pall", _print_all_stack},
@@ -103,7 +118,31 @@ void _opcode_function(char *value, char *monty_opcode, int line_number)
 	while (_functions[i].opcode)
 	{
 		if (strcmp(_functions[i].opcode, monty_opcode) == 0)
-			_functions[i].f()
-
+		{
+			if (strcmp(monty_opcode, "push") == 0)
+			{
+				if (value == NULL)
+					error_function(5, monty_opcode, line_number);
+				else if (value[0] == '-')
+				{
+					value = value + 1;
+					signo = (signo * -1);
+				}
+				while (value[j])
+				{
+					if (isdigit(value[j]) == 0)
+						error_function(5, monty_opcode, line_number);
+						j++;
+				}
+				int_value = atoi(value) * signo;
+				_functions[i].f(&head, int_value);
+			}
+			else
+				_functions[i].f(&head, line_number);
+			valid_inst = 1;
+		}
+		i++;
 	}
+	if (valid_inst == 0)
+		error_function(3, monty_opcode, line_number);
 }
