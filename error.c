@@ -65,6 +65,9 @@ void error_funct_2(int error_number, int line_number)
 		case 12:
 			fprintf(stderr, "L%d: division by zero\n", line_number);
 			break;
+		case 13:
+			fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+			break;
 	default:
 		return;
 	}

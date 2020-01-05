@@ -54,5 +54,6 @@ void (*get_op_func(char *s))(stack_t **, unsigned int);
 void _sub_top_second_stack(stack_t **actual_head, unsigned int line_number);
 void _div_second_top_stack(stack_t **actual_head, unsigned int line_number);
 void error_funct_2(int error_number, int line_number);
+void _mul_second_top_stack(stack_t **actual_head, unsigned int line_number);
 
 #endif /* _MONTY */
