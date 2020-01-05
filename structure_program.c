@@ -1,11 +1,10 @@
 #include "monty.h"
 
 /**
-  * _opcode_function - find the specific opcode function to use
-  * @value: Value to manipulate
-  * @monty_opcode: string with monty instruction
-  * @line_number: the line where is the instruction
+  * get_op_func - find the specific opcode function to use
+  * @s: string with monty instruction
   *
+  * Return: always pointer to function o NULL
   */
 
 void (*get_op_func(char *s))(stack_t **, unsigned int)
