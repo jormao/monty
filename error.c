@@ -47,3 +47,27 @@ void error_function(int error_number, char *file_name, int line_number)
 	free_dlistint(head);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * error_funct_2 - function to print in stderr all the errors
+ * @error_number: number of the error
+ * @file_name: name of the file with bitcode
+ * @line_number: line of the monty file that is readed.
+ *
+ */
+void error_funct_2(int error_number, int line_number)
+{
+	switch (error_number)
+	{
+		case 11:
+			fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+			break;
+		case 12:
+			fprintf(stderr, "L%d: division by zero\n", line_number);
+			break;
+	default:
+		return;
+	}
+	free_dlistint(head);
+	exit(EXIT_FAILURE);
+}
