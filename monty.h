@@ -47,5 +47,6 @@ void _print_all_stack(stack_t **actual_head, unsigned int line_number);
 void free_dlistint(stack_t *head);
 void _print_top_stack(stack_t **actual_head, unsigned int line_number);
 void _remove_top_stack(stack_t **actual_head, unsigned int line_number);
+void _swap_two_top_stack(stack_t **actual_head, unsigned int line_number);
 
 #endif /* _MONTY */
