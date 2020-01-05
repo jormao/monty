@@ -92,6 +92,8 @@ void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
 
 	(void)line_number;
 	tmp_node = *actual_head;
+	if (tmp_node == NULL)
+		printf("\n");
 	while (tmp_node)
 	{
 		if (tmp_node->n == 0)
