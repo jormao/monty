@@ -81,11 +81,10 @@ void _print_top_stack(stack_t **actual_head, unsigned int line_number)
 }
 
 /**
- * delete_dnodeint_at_index - deletes the node at index
- * @head: pointer to beggin
- * @index: indicate the node that shold be deleted
+ * _remove_top_stack - deletes the node at top in the stack
+ * @actual_head: pointer to beggin
+ * @line_number: indicate the line number of command
  *
- * Return: 1 success, -1 failed
  */
 
 void _remove_top_stack(stack_t **actual_head, unsigned int line_number)
