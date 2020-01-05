@@ -100,9 +100,9 @@ void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
 	while (tmp_node != NULL)
 	{
 		if (tmp_node->n == 0)
-			break;;
+			break;
 		if (tmp_node->n < 32 || tmp_node->n > 126)
-			break;;
+			break;
 		printf("%c", tmp_node->n);
 		tmp_node = tmp_node->next;
 	}
@@ -110,7 +110,7 @@ void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
 }
 
 /**
- * _print_char_top_stack -  prints the char at the top of the stack
+ * _rotate_stack_top - rotates the stack to the top.
  * @actual_head: head of the dlistint
  * @line_number: line number of the command
  *
