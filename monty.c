@@ -81,6 +81,9 @@ void error_function(int error_number, char *file_name, int line_number)
 		case 8:
 			fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 			break;
+		case 9:
+			fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+			break;
 	default:
 		return;
 	}
@@ -124,6 +127,7 @@ void _opcode_function(char *value, char *monty_opcode, int line_number)
 		{"pint", _print_top_stack},
 		{"pop", _remove_top_stack},
 		{"swap", _swap_two_top_stack},
+		{"add", _add_two_top_stack},
 		{NULL, NULL}
 	};
 
