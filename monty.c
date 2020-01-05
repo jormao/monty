@@ -63,7 +63,11 @@ void split_string(char *lineptr, int line_number)
 	value = strtok(NULL, delim);
 
 	if (opcode != NULL)
+	{
+		if (opcode[0] == '#')
+			return;
 		_opcode_function(value, opcode, line_number);
+	}
 }
 
 /**
