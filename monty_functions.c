@@ -74,8 +74,8 @@ void _print_top_stack(stack_t **actual_head, unsigned int line_number)
 
 	(void)line_number;
 	tmp_node = *actual_head;
-	if (actual_head != NULL)
+	if (*actual_head != NULL)
 		printf("%i\n", tmp_node->n);
 	else
-	error_function(6, NULL, line_number);
+		error_function(6, NULL, line_number);
 }
