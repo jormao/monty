@@ -6,6 +6,7 @@
  * @actual_head: address of the head
  *
  */
+
 void _swap_two_top_stack(stack_t **actual_head, unsigned int line_number)
 {
 	stack_t *tmp_node = *actual_head;
@@ -33,6 +34,7 @@ void _swap_two_top_stack(stack_t **actual_head, unsigned int line_number)
  * @actual_head: address of the head
  *
  */
+
 void _add_two_top_stack(stack_t **actual_head, unsigned int line_number)
 {
 	stack_t *tmp_node = *actual_head;
@@ -65,4 +67,32 @@ void _nop_does_anything(stack_t **actual_head, unsigned int line_number)
 {
 	(void)line_number;
 	(void)actual_head;
+}
+
+/**
+ * _sub_top_second_stack - subtracts top element from the second top elemen.
+ * @line_number: line number of the command in monty file
+ * @actual_head: address of the head
+ *
+ */
+
+void _sub_top_second_stack(stack_t **actual_head, unsigned int line_number)
+{
+	stack_t *tmp_node = *actual_head;
+	int count = 0, tmp_value = 0;
+
+	while (tmp_node)
+	{
+		tmp_node = tmp_node->next;
+		count++;
+	}
+	if (count >= 2)
+	{
+		tmp_node = *actual_head;
+		tmp_value = tmp_node->next->n - tmp_node->n;
+		tmp_node->next->n = tmp_value;
+		_remove_top_stack(actual_head, line_number);
+	}
+	else
+		error_function(10, NULL, line_number);
 }

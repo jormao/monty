@@ -38,6 +38,9 @@ void error_function(int error_number, char *file_name, int line_number)
 		case 9:
 			fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 			break;
+		case 10:
+			fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
+			break;
 	default:
 		return;
 	}

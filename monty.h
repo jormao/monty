@@ -51,5 +51,6 @@ void _swap_two_top_stack(stack_t **actual_head, unsigned int line_number);
 void _add_two_top_stack(stack_t **actual_head, unsigned int line_number);
 void _nop_does_anything(stack_t **actual_head, unsigned int line_number);
 void (*get_op_func(char *s))(stack_t **, unsigned int);
+void _sub_top_second_stack(stack_t **actual_head, unsigned int line_number);
 
 #endif /* _MONTY */
