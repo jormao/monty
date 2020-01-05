@@ -70,6 +70,12 @@ void error_funct_2(int error_number, int line_number)
 		case 14:
 			fprintf(stderr, "L<%d: can't mod, stack too short\n", line_number);
 			break;
+		case 15:
+			fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+			break;
+		case 16:
+			fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+			break;
 	default:
 		return;
 	}

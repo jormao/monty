@@ -57,3 +57,25 @@ void _mod_second_top_stack(stack_t **actual_head, unsigned int line_number)
 	else
 		error_funct_2(14, line_number);
 }
+
+/**
+ * _print_char_top_stack -  prints the char at the top of the stack
+ * @actual_head: head of the dlistint
+ * @line_number: line number of the command
+ *
+ */
+
+void _print_char_top_stack(stack_t **actual_head, unsigned int line_number)
+{
+	stack_t *tmp_node;
+
+	(void)line_number;
+	tmp_node = *actual_head;
+	if (*actual_head != NULL)
+		if (tmp_node->n >= 32 && tmp_node->n <= 126)
+			printf("%c\n", tmp_node->n);
+		else
+			error_funct_2(16, line_number);
+	else
+		error_funct_2(15, line_number);
+}
