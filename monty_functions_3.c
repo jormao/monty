@@ -35,7 +35,7 @@ void _mul_second_top_stack(stack_t **actual_head, unsigned int line_number)
  *
  */
 
-void _mod_secondd_top_stack(stack_t **actual_head, unsigned int line_number)
+void _mod_second_top_stack(stack_t **actual_head, unsigned int line_number)
 {
 	stack_t *tmp_node = *actual_head;
 	int count = 0, tmp_value = 0;
