@@ -108,3 +108,33 @@ void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
 	}
 	printf("\n");
 }
+
+/**
+ * _print_char_top_stack -  prints the char at the top of the stack
+ * @actual_head: head of the dlistint
+ * @line_number: line number of the command
+ *
+ */
+
+void _rotate_stack_top(stack_t **actual_head, unsigned int line_number)
+{
+	stack_t *tmp_node;
+	stack_t *new_node;
+	int tmp_value;
+
+	tmp_node = *actual_head;
+	if (tmp_node == NULL)
+		return;
+	tmp_value = tmp_node->n;
+	while (tmp_node->next)
+	{
+		tmp_node = tmp_node->next;
+	}
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
+		error_function(4, NULL, line_number);
+	tmp_node->next = new_node;
+	new_node->prev = tmp_node;
+	new_node->n = tmp_value;
+	_remove_top_stack(actual_head, line_number);
+}
