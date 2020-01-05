@@ -29,7 +29,7 @@ void _mul_second_top_stack(stack_t **actual_head, unsigned int line_number)
 }
 
 /**
- * _mod_secondd_top_stack - compute rest div second top element by top of stack
+ * _mod_second_top_stack - compute rest div second top element by top of stack
  * @line_number: line number of the command in monty file
  * @actual_head: address of the head
  *
@@ -49,7 +49,7 @@ void _mod_second_top_stack(stack_t **actual_head, unsigned int line_number)
 	{
 		tmp_node = *actual_head;
 		if (tmp_node->n == 0)
-			error_funct_2(12, line_number);
+			error_funct_2(15, line_number);
 		tmp_value = tmp_node->next->n % tmp_node->n;
 		tmp_node->next->n = tmp_value;
 		_remove_top_stack(actual_head, line_number);
