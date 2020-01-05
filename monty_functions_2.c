@@ -53,3 +53,16 @@ void _add_two_top_stack(stack_t **actual_head, unsigned int line_number)
 	else
 		error_function(9, NULL, line_number);
 }
+
+/**
+ * _nop_does_anything - doesn’t do anything.
+ * @line_number: line number of the command in monty file
+ * @actual_head: address of the head
+ *
+ */
+
+void _nop_does_anything(stack_t **actual_head, unsigned int line_number)
+{
+	(void)line_number;
+	(void)actual_head;
+}

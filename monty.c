@@ -47,51 +47,6 @@ int main(int argc, char **argv)
 }
 
 /**
- * error_function - function to print in stderr all the errors
- * @error_number: number of the error
- * @file_name: name of the file with bitcode
- * @line_number: line of the monty file that is readed.
- *
- */
-void error_function(int error_number, char *file_name, int line_number)
-{
-	switch (error_number)
-	{
-		case 1:
-			fprintf(stderr, "USAGE: monty file\n");
-			break;
-		case 2:
-			fprintf(stderr, "Error: Can't open file %s\n", file_name);
-			break;
-		case 3:
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, file_name);
-			break;
-		case 4:
-			fprintf(stderr, "Error: malloc failed\n");
-			break;
-		case 5:
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			break;
-		case 6:
-			fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-			break;
-		case 7:
-			fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-			break;
-		case 8:
-			fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-			break;
-		case 9:
-			fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-			break;
-	default:
-		return;
-	}
-	free_dlistint(head);
-	exit(EXIT_FAILURE);
-}
-
-/**
  * split_string - Separates by lines to determinate the function to use
  * @lineptr: String representing a line in a file.
  * @line_number: Line number for the opcode.
@@ -120,45 +75,34 @@ void split_string(char *lineptr, int line_number)
   */
 void _opcode_function(char *value, char *monty_opcode, int line_number)
 {
-	int i = 0, signo = 1, j = 0, int_value = 0, valid_inst = 0;
-	instruction_t _functions[] = {
-		{"push", _push_to_stack},
-		{"pall", _print_all_stack},
-		{"pint", _print_top_stack},
-		{"pop", _remove_top_stack},
-		{"swap", _swap_two_top_stack},
-		{"add", _add_two_top_stack},
-		{NULL, NULL}
-	};
+	void (*operation)(stack_t **, unsigned int);
+	int signo = 1, j = 0;
+	unsigned int int_value = 0;
 
-	while (_functions[i].opcode)
+	operation = get_op_func(monty_opcode);
+	if (operation)
 	{
-		if (strcmp(_functions[i].opcode, monty_opcode) == 0)
+		if (strcmp(monty_opcode, "push") == 0)
 		{
-			if (strcmp(monty_opcode, "push") == 0)
+			if (value == NULL)
+				error_function(5, monty_opcode, line_number);
+			else if (value[0] == '-')
 			{
-				if (value == NULL)
-					error_function(5, monty_opcode, line_number);
-				else if (value[0] == '-')
-				{
-					value = value + 1;
-					signo = (signo * -1);
-				}
-				while (value[j])
-				{
-					if (isdigit(value[j]) == 0)
-						error_function(5, monty_opcode, line_number);
-						j++;
-				}
-				int_value = atoi(value) * signo;
-				_functions[i].f(&head, int_value);
+				value = value + 1;
+				signo = (signo * -1);
 			}
-			else
-				_functions[i].f(&head, line_number);
-			valid_inst = 1;
+			while (value[j])
+			{
+				if (isdigit(value[j]) == 0)
+					error_function(5, monty_opcode, line_number);
+					j++;
+			}
+			int_value = atoi(value) * signo;
+			operation(&head, int_value);
 		}
-		i++;
+		else
+			operation(&head, line_number);
+		return;
 	}
-	if (valid_inst == 0)
-		error_function(3, monty_opcode, line_number);
+	error_function(3, monty_opcode, line_number);
 }
