@@ -119,29 +119,24 @@ void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
 void _rotate_stack_top(stack_t **actual_head, unsigned int line_number)
 {
 	stack_t *tmp_node;
-	stack_t *new_node;
-	int tmp_value, count = 0;
+	int tmp_value = 0, count = 0;
 
+	(void)line_number;
 	tmp_node = *actual_head;
 	while (tmp_node)
 	{
 		tmp_node = tmp_node->next;
 		count++;
 	}
+	tmp_node = *actual_head;
 	if (count > 1)
 	{
-		tmp_node = *actual_head;
 		tmp_value = tmp_node->n;
 		while (tmp_node->next)
 		{
+			tmp_node->n = tmp_node->next->n;
 			tmp_node = tmp_node->next;
 		}
-		new_node = malloc(sizeof(stack_t));
-		if (new_node == NULL)
-			error_function(4, NULL, line_number);
-		tmp_node->next = new_node;
-		new_node->prev = tmp_node;
-		new_node->n = tmp_value;
-		_remove_top_stack(actual_head, line_number);
+		tmp_node->n = tmp_value;
 	}
 }
