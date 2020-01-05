@@ -94,13 +94,14 @@ void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
 	tmp_node = *actual_head;
 	if (tmp_node == NULL)
 		printf("\n");
-	while (tmp_node)
+	while (tmp_node != NULL)
 	{
 		if (tmp_node->n == 0)
 			return;
 		if (tmp_node->n < 32 || tmp_node->n > 126)
 			return;
-		printf("%c\n", tmp_node->n);
+		printf("%c", tmp_node->n);
 		tmp_node = tmp_node->next;
 	}
+	printf("\n");
 }
