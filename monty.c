@@ -72,8 +72,11 @@ void error_function(int error_number, char *file_name, int line_number)
 		case 5:
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			break;
+		case 6:
+			fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+			break;
 	default:
-		printf("Error pendiente por manejar\n");
+		return;
 	}
 	free_dlistint(head);
 	exit(EXIT_FAILURE);
@@ -112,6 +115,7 @@ void _opcode_function(char *value, char *monty_opcode, int line_number)
 	instruction_t _functions[] = {
 		{"push", _push_to_stack},
 		{"pall", _print_all_stack},
+		{"pint", _print_top_stack},
 		{NULL, NULL}
 	};
 

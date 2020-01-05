@@ -45,5 +45,6 @@ void _opcode_function(char *value, char *opcode, int line_number);
 void _push_to_stack(stack_t **new_node, unsigned int value);
 void _print_all_stack(stack_t **actual_head, unsigned int line_number);
 void free_dlistint(stack_t *head);
+void _print_top_stack(stack_t **actual_head, unsigned int line_number);
 
 #endif /* _MONTY */

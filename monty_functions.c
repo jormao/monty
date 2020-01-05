@@ -60,3 +60,22 @@ void free_dlistint(stack_t *head)
 		free(head);
 	}
 }
+
+/**
+ * _print_top_stack - prints top element of stack
+ * @actual_head: head of the dlistint
+ * @line_number: line number of the command
+ *
+ */
+
+void _print_top_stack(stack_t **actual_head, unsigned int line_number)
+{
+	stack_t *tmp_node;
+
+	(void)line_number;
+	tmp_node = *actual_head;
+	if (actual_head != NULL)
+		printf("%i\n", tmp_node->n);
+	else
+	error_function(6, NULL, line_number);
+}
