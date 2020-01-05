@@ -75,6 +75,9 @@ void error_function(int error_number, char *file_name, int line_number)
 		case 6:
 			fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 			break;
+		case 7:
+			fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+			break;	
 	default:
 		return;
 	}
@@ -116,6 +119,7 @@ void _opcode_function(char *value, char *monty_opcode, int line_number)
 		{"push", _push_to_stack},
 		{"pall", _print_all_stack},
 		{"pint", _print_top_stack},
+		{"pop", _remove_top_stack},
 		{NULL, NULL}
 	};
 

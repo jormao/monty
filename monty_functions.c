@@ -79,3 +79,26 @@ void _print_top_stack(stack_t **actual_head, unsigned int line_number)
 	else
 		error_function(6, NULL, line_number);
 }
+
+/**
+ * delete_dnodeint_at_index - deletes the node at index
+ * @head: pointer to beggin
+ * @index: indicate the node that shold be deleted
+ *
+ * Return: 1 success, -1 failed
+ */
+
+void _remove_top_stack(stack_t **actual_head, unsigned int line_number)
+{
+	stack_t *tmp, *eraser;
+
+	tmp = *actual_head;
+	if (tmp == NULL)
+		error_function(7, NULL, line_number);
+	eraser = *actual_head;
+	*actual_head = tmp->next;
+	tmp = tmp->next;
+	if (tmp != NULL)
+		tmp->prev = NULL;
+	free(eraser);
+}
