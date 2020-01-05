@@ -57,5 +57,6 @@ void error_funct_2(int error_number, int line_number);
 void _mul_second_top_stack(stack_t **actual_head, unsigned int line_number);
 void _mod_second_top_stack(stack_t **actual_head, unsigned int line_number);
 void _print_char_top_stack(stack_t **actual_head, unsigned int line_number);
+void _print_string_top_stack(stack_t **actual_head, unsigned int line_number);
 
 #endif /* _MONTY */

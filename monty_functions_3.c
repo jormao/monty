@@ -69,7 +69,6 @@ void _print_char_top_stack(stack_t **actual_head, unsigned int line_number)
 {
 	stack_t *tmp_node;
 
-	(void)line_number;
 	tmp_node = *actual_head;
 	if (*actual_head != NULL)
 		if (tmp_node->n >= 32 && tmp_node->n <= 126)
@@ -78,4 +77,28 @@ void _print_char_top_stack(stack_t **actual_head, unsigned int line_number)
 			error_funct_2(16, line_number);
 	else
 		error_funct_2(15, line_number);
+}
+
+/**
+ * _print_string_top_stack - prints the string starting at the top of the stack
+ * @actual_head: head of the dlistint
+ * @line_number: line number of the command
+ *
+ */
+
+void _print_string_top_stack(stack_t **actual_head, unsigned int line_number)
+{
+	stack_t *tmp_node;
+
+	(void)line_number;
+	tmp_node = *actual_head;
+	while (tmp_node)
+	{
+		if (tmp_node->n == 0)
+			return;
+		if (tmp_node->n < 32 || tmp_node->n > 126)
+			return;
+		printf("%c\n", tmp_node->n);
+		tmp_node = tmp_node->next;
+	}
 }
