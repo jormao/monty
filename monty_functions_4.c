@@ -35,7 +35,7 @@ void _rotate_stack_bottom(stack_t **actual_head, unsigned int line_number)
 }
 
 /**
- * _push_to_queue - pushes an element to the queue.
+ * _push_in_queue - pushes an element to the queue.
  * @value: Value to add to the node
  * @actual_head: address of the head
  *
@@ -58,7 +58,7 @@ void _push_in_queue(stack_t **actual_head, unsigned int value)
 		head = new_node;
 		new_node->prev = NULL;
 		return;
-	}	
+	}
 	while (last->next != NULL)
 	{
 		last = last->next;

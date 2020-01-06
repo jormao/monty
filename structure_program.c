@@ -30,7 +30,7 @@ void (*get_op_func(char *s))(stack_t **, unsigned int)
 	int i = 0;
 
 	while (_functions[i].opcode)
-	{		
+	{
 		if (!(strcmp(_functions[i].opcode, s)))
 			return (_functions[i].f);
 		i++;

@@ -51,7 +51,9 @@ int main(int argc, char **argv)
  * split_string - Separates by lines to determinate the function to use
  * @lineptr: String representing a line in a file.
  * @line_number: Line number for the opcode.
+ * @flag: flag to know if is stack or queue
  *
+ * Return: 0 if is stack or 1 if is queue
  */
 int split_string(char *lineptr, int line_number, int flag)
 {
@@ -77,19 +79,20 @@ int split_string(char *lineptr, int line_number, int flag)
 			flag = 1;
 			return (flag);
 		}
-		_opcode_function(value, opcode, line_number, flag);
+		_opcode_funct(value, opcode, line_number, flag);
 	}
 	return (flag);
 }
 
 /**
-  * _opcode_function - find the specific opcode function to use
+  * _opcode_funct - find the specific opcode function to use
   * @value: Value to manipulate
   * @monty_opcode: string with monty instruction
   * @line_number: the line where is the instruction
+  * @flag: flag to know if is stack or queue
   *
   */
-void _opcode_function(char *value, char *monty_opcode, int line_number, int flag)
+void _opcode_funct(char *value, char *monty_opcode, int line_number, int flag)
 {
 	void (*operation)(stack_t **, unsigned int);
 	int signo = 1, j = 0;
@@ -113,7 +116,7 @@ void _opcode_function(char *value, char *monty_opcode, int line_number, int flag
 					error_function(5, monty_opcode, line_number);
 					j++;
 			}
-			int_value = atoi(value) * signo;		
+			int_value = atoi(value) * signo;
 			if (flag == 0)
 				operation(&head, int_value);
 			if (flag == 1)
