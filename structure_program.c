@@ -24,6 +24,7 @@ void (*get_op_func(char *s))(stack_t **, unsigned int)
 		{"pchar", _print_char_top_stack},
 		{"pstr", _print_string_top_stack},
 		{"rotl", _rotate_stack_top},
+		{"rotr", _rotate_stack_bottom},
 		{NULL, NULL}
 	};
 	int i = 0;
