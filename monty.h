@@ -40,8 +40,8 @@ extern stack_t *head;
 
 void read_file(FILE *file);
 void error_function(int error_number, char *file_name, int line_number);
-void split_string(char *lineptr, int line_number);
-void _opcode_function(char *value, char *opcode, int line_number);
+int split_string(char *lineptr, int line_number, int flag);
+void _opcode_function(char *value, char *opcode, int line_number, int flag);
 void _push_to_stack(stack_t **new_node, unsigned int value);
 void _print_all_stack(stack_t **actual_head, unsigned int line_number);
 void free_dlistint(stack_t *head);
@@ -60,5 +60,6 @@ void _print_char_top_stack(stack_t **actual_head, unsigned int line_number);
 void _print_string_top_stack(stack_t **actual_head, unsigned int line_number);
 void _rotate_stack_top(stack_t **actual_head, unsigned int line_number);
 void _rotate_stack_bottom(stack_t **actual_head, unsigned int line_number);
+void _push_in_queue(stack_t **actual_head, unsigned int value);
 
 #endif /* _MONTY */

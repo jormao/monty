@@ -6,6 +6,7 @@
  * @actual_head: address of the head
  *
  */
+
 void _push_to_stack(stack_t **actual_head, unsigned int value)
 {
 	stack_t *new_node;

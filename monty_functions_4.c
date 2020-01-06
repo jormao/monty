@@ -33,3 +33,36 @@ void _rotate_stack_bottom(stack_t **actual_head, unsigned int line_number)
 		tmp_node->n = tmp_value;
 	}
 }
+
+/**
+ * _push_to_queue - pushes an element to the queue.
+ * @value: Value to add to the node
+ * @actual_head: address of the head
+ *
+ */
+
+void _push_in_queue(stack_t **actual_head, unsigned int value)
+{
+
+	stack_t *new_node;
+	stack_t *last;
+
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
+		error_function(4, NULL, value);
+	last = *actual_head;
+	new_node->n = value;
+	new_node->next = NULL;
+	if (*actual_head == NULL)
+	{
+		head = new_node;
+		new_node->prev = NULL;
+		return;
+	}	
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	last->next = new_node;
+	new_node->prev = last;
+}

@@ -37,10 +37,11 @@ int main(int argc, char **argv)
 	char *lineprt = NULL;
 	size_t n = 0;
 	int line_number = 1;
+	int flag = 0;
 
 	while (getline(&lineprt, &n, file) != EOF)
 	{
-		split_string(lineprt, line_number);
+		flag = split_string(lineprt, line_number, flag);
 		line_number++;
 	}
 	free(lineprt);
@@ -52,7 +53,7 @@ int main(int argc, char **argv)
  * @line_number: Line number for the opcode.
  *
  */
-void split_string(char *lineptr, int line_number)
+int split_string(char *lineptr, int line_number, int flag)
 {
 	char *delim;
 	char *opcode;
@@ -65,9 +66,20 @@ void split_string(char *lineptr, int line_number)
 	if (opcode != NULL)
 	{
 		if (opcode[0] == '#')
-			return;
-		_opcode_function(value, opcode, line_number);
+			return (flag);
+		if (strcmp(opcode, "stack") == 0)
+		{
+			flag = 0;
+			return (flag);
+		}
+		if (strcmp(opcode, "queue") == 0)
+		{
+			flag = 1;
+			return (flag);
+		}
+		_opcode_function(value, opcode, line_number, flag);
 	}
+	return (flag);
 }
 
 /**
@@ -77,7 +89,7 @@ void split_string(char *lineptr, int line_number)
   * @line_number: the line where is the instruction
   *
   */
-void _opcode_function(char *value, char *monty_opcode, int line_number)
+void _opcode_function(char *value, char *monty_opcode, int line_number, int flag)
 {
 	void (*operation)(stack_t **, unsigned int);
 	int signo = 1, j = 0;
@@ -101,8 +113,11 @@ void _opcode_function(char *value, char *monty_opcode, int line_number)
 					error_function(5, monty_opcode, line_number);
 					j++;
 			}
-			int_value = atoi(value) * signo;
-			operation(&head, int_value);
+			int_value = atoi(value) * signo;		
+			if (flag == 0)
+				operation(&head, int_value);
+			if (flag == 1)
+				_push_in_queue(&head, int_value);
 		}
 		else
 			operation(&head, line_number);
